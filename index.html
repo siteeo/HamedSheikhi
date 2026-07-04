@@ -748,50 +748,51 @@ footer a:hover{ color:var(--gold); }
     if(e.key === 'ArrowRight') renderProject(currentIndex - 1);
     if(e.key === 'ArrowLeft') renderProject(currentIndex + 1);
   });
- /* ---------- Portfolio Filter ---------- */
+/* ---------- Portfolio Filter ---------- */
 
-const filterButtons=document.querySelectorAll(".filter-btn");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
-filterButtons.forEach(btn=>{
+filterButtons.forEach(btn => {
 
-btn.addEventListener("click",()=>{
+    btn.addEventListener("click", () => {
 
-filterButtons.forEach(b=>b.classList.remove("active"));
+        // فعال شدن دکمه انتخاب شده
+        filterButtons.forEach(button => {
+            button.classList.remove("active");
+        });
 
-btn.classList.add("active");
+        btn.classList.add("active");
 
-const filter=btn.dataset.filter;
+        // نوع فیلتر
+        const filter = btn.dataset.filter;
 
-document.querySelectorAll(".p-card").forEach(card=>{
+        // نمایش یا مخفی کردن پروژه‌ها
+        document.querySelectorAll(".p-card").forEach(card => {
 
-if(card.dataset.type===filter){
+            if (card.dataset.type === filter) {
 
-card.classList.remove("hide");
+                card.classList.remove("hide");
 
-}
-else{
+            } else {
 
-card.classList.add("hide");
+                card.classList.add("hide");
 
-}
+            }
 
-else if(card.dataset.type===filter){
+        });
 
-card.classList.remove("hide");
-
-}
-
-else{
-
-card.classList.add("hide");
-
-}
+    });
 
 });
 
-});
+// نمایش اولیه فقط پروژه‌های تدوین / موشن
+document.querySelectorAll(".p-card").forEach(card => {
 
-});   
+    if (card.dataset.type !== "video") {
+        card.classList.add("hide");
+    }
+
+});
 })();
 </script>
 
