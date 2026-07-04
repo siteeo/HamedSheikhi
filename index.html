@@ -521,8 +521,7 @@ footer a:hover{ color:var(--gold); }
       =================================================================
     -->
     <div class="portfolio-filter">
-    <button class="filter-btn active" data-filter="all">همه</button>
-    <button class="filter-btn" data-filter="video">ویدیو</button>
+    <button class="filter-btn active" data-filter="video">تدوین / موشن</button>
     <button class="filter-btn" data-filter="image">طراحی</button>
 </div>
      <div class="portfolio-grid reveal reveal-stagger" id="portfolioGrid">
@@ -765,9 +764,14 @@ const filter=btn.dataset.filter;
 
 document.querySelectorAll(".p-card").forEach(card=>{
 
-if(filter==="all"){
+if(card.dataset.type===filter){
 
 card.classList.remove("hide");
+
+}
+else{
+
+card.classList.add("hide");
 
 }
 
