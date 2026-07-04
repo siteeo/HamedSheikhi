@@ -346,6 +346,43 @@ section{ padding:64px 0; position:relative; }
 @media(max-width:640px){ .p-modal-nav{ display:none; } }
 .p-modal-close:hover, .p-modal-nav:hover{ background:var(--gold); border-color:var(--gold); color:#1A1508; }
 
+ /* =====================================================
+   PORTFOLIO FILTER
+===================================================== */
+
+.portfolio-filter{
+display:flex;
+justify-content:center;
+gap:14px;
+margin-bottom:35px;
+flex-wrap:wrap;
+}
+
+.filter-btn{
+padding:12px 24px;
+border-radius:999px;
+border:1px solid var(--line);
+background:var(--glass);
+color:var(--text);
+cursor:pointer;
+transition:.3s;
+font-family:var(--font);
+}
+
+.filter-btn:hover{
+border-color:var(--gold);
+color:var(--gold);
+}
+
+.filter-btn.active{
+background:var(--gold);
+color:#111;
+border-color:var(--gold);
+}
+
+.p-card.hide{
+display:none;
+}  
 /* =====================================================
    FOOTER + FLOATING WHATSAPP
 ===================================================== */
@@ -483,7 +520,12 @@ footer a:hover{ color:var(--gold); }
       یک پس‌زمینه‌ی گرادیانی جای آن را نشان می‌دهد.
       =================================================================
     -->
-    <div class="portfolio-grid reveal reveal-stagger" id="portfolioGrid">
+    <div class="portfolio-filter">
+    <button class="filter-btn active" data-filter="all">همه</button>
+    <button class="filter-btn" data-filter="video">ویدیو</button>
+    <button class="filter-btn" data-filter="image">طراحی</button>
+</div>
+     <div class="portfolio-grid reveal reveal-stagger" id="portfolioGrid">
 
       <article class="p-card" style="--i:0" data-type="video" data-src="" data-title="تدوین و رنگ‌بندی سینمایی" data-tag="تیزر تبلیغاتی">
         <div class="p-media">
@@ -707,6 +749,45 @@ footer a:hover{ color:var(--gold); }
     if(e.key === 'ArrowRight') renderProject(currentIndex - 1);
     if(e.key === 'ArrowLeft') renderProject(currentIndex + 1);
   });
+ /* ---------- Portfolio Filter ---------- */
+
+const filterButtons=document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+filterButtons.forEach(b=>b.classList.remove("active"));
+
+btn.classList.add("active");
+
+const filter=btn.dataset.filter;
+
+document.querySelectorAll(".p-card").forEach(card=>{
+
+if(filter==="all"){
+
+card.classList.remove("hide");
+
+}
+
+else if(card.dataset.type===filter){
+
+card.classList.remove("hide");
+
+}
+
+else{
+
+card.classList.add("hide");
+
+}
+
+});
+
+});
+
+});   
 })();
 </script>
 
